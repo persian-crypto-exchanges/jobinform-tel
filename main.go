@@ -37,7 +37,10 @@ func main() {
 
 				if update.Message.Text == "ping" {
 					usr, _ := client.GetUserInfo(update.Message.Chat.ID)
-					client.SendMessage(update.Message.Chat.ID, fmt.Sprintf("Pong! Hello, %v!", usr.FirstName))
+					err := client.SendMessage(update.Message.Chat.ID, fmt.Sprintf("Pong! Hello, %v!", usr.FirstName))
+					if err != nil {
+						log.Printf("Error sending message: %v", err)
+					}
 				}
 
 				if err != nil {
